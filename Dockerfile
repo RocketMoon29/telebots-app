@@ -13,7 +13,7 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 
 # Очистка кэша npm перед установкой пакетов
 # RUN npm cache clean --force
-RUN npm cache clean 
+RUN npm cache verify
 
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
