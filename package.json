@@ -11,7 +11,9 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "telegraf": "^4.14.0"
+    "telegraf": "^4.14.0",
+    "encoding": "latest",
+    "docker": "file:./app/docker"
   },
   "devDependencies": {
     "@types/telegram-web-app": "^6.9.1",

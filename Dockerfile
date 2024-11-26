@@ -38,6 +38,10 @@ RUN \
 
 # Production image, copy all the files and run next
 FROM base AS runner
+
+# Add the command to update npm to the latest version
+RUN npm install -g npm@latest
+
 WORKDIR /app
 
 ENV NODE_ENV=production
