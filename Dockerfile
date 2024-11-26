@@ -15,7 +15,7 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 RUN npm cache clean --force
 
 # Установка зависимостей с использованием npm ci для чистоты установки
-RUN npm ci
+# RUN npm ci
 
 
 RUN \
