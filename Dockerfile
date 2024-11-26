@@ -10,6 +10,14 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+
+# Очистка кэша npm перед установкой пакетов
+RUN npm cache clean --force
+
+# Установка зависимостей с использованием npm ci для чистоты установки
+RUN npm ci
+
+
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
