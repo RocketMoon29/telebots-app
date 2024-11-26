@@ -12,7 +12,8 @@ WORKDIR /app
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 
 # Очистка кэша npm перед установкой пакетов
-RUN npm cache clean --force
+# RUN npm cache clean --force
+RUN npm cache clean 
 
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
@@ -22,7 +23,7 @@ RUN \
   fi
 
 # Установка зависимостей с использованием npm ci для чистоты установки
-RUN npm install
+# RUN npm install
 
 RUN npm audit fix
 
