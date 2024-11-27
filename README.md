@@ -118,4 +118,4 @@ Your feedback and contributions are welcome!
 curl -X POST '<APP URL>/api/telegram-hook/init?secret_hash=<KEY>'
 
 2
-curl -X POST 'https://api.telegram.org/bot<TOKEN>/setWebhook?url=<APP URL>/api/telegram-hook?secret_hash=<KEY>'
+curl -X POST 'https://api.telegram.org/bot<TOKEN>/setWebhook?url=<APP_URL>/api/telegram-hook?secret_hash=<KEY>'
