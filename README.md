@@ -111,3 +111,11 @@ To learn more, take a look at the following resources:
 
 Your feedback and contributions are welcome!
 
+
+
+связать вэбхук
+1
+curl -X POST '<APP URL>/api/telegram-hook/init?secret_hash=<KEY>'
+
+2
+curl -X POST 'https://api.telegram.org/bot<TOKEN>/setWebhook?url=<APP URL>/api/telegram-hook?secret_hash=<KEY>'
