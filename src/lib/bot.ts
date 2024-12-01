@@ -11,18 +11,18 @@ const bot = new Telegraf(BOT_TOKEN)
 
 bot.start((ctx) => {
     ctx.reply(
-        "Let's get started ;)",
-        Markup.inlineKeyboard([Markup.button.webApp("View Store", BASE_PATH)]),
+        "Скорее к покупкам! 😀",
+        Markup.inlineKeyboard([Markup.button.webApp("🛍 Перейти в магазин", BASE_PATH)]),
     )
 });
-bot.help((ctx) => ctx.reply("Test /start or /menu command!"))
+bot.help((ctx) => ctx.reply("Напишите команды /start или /menu!"))
 bot.command('menu', (ctx) =>
     ctx.setChatMenuButton({
-        text: "Store",
+        text: "Магазин",
         type: "web_app",
         web_app: {url: BASE_PATH},
     }))
-bot.on(message("text"), (ctx) => ctx.reply("Hi, I`m Mini Woo. It`s nice to meet you!:) /help"));
+bot.on(message("text"), (ctx) => ctx.reply(`Привет, я ${ctx.botInfo.first_name}. Приятно познакомиться! 👋 /help`));
 
 bot.on("shipping_query", async (ctx) => {
     const payload = JSON.parse(ctx.update.shipping_query.invoice_payload)
@@ -30,7 +30,7 @@ bot.on("shipping_query", async (ctx) => {
     if (shippingOptions.length)
         ctx.answerShippingQuery(true, shippingOptions, undefined)
     else
-        ctx.answerShippingQuery(false, undefined, "No shipping option available at your zone!")
+        ctx.answerShippingQuery(false, undefined, "Нет доступных вариантов доставки в вашей зоне!")
 });
 
 bot.on("pre_checkout_query", async (ctx) => {
@@ -40,16 +40,16 @@ bot.on("pre_checkout_query", async (ctx) => {
     if (res.status === 200)
         await ctx.answerPreCheckoutQuery(true);
     else
-        await ctx.answerPreCheckoutQuery(false, "Problem occurred during update order, contact support!");
+        await ctx.answerPreCheckoutQuery(false, "Произошла ошибка при обновлении заказа, свяжитесь с поддержкой!");
 });
 
 bot.on(message("successful_payment"), async (ctx) => {
     const payload = JSON.parse(ctx.update.message.successful_payment.invoice_payload)
     const res = await woo.setOrderPaid(payload.orderId)
     if (res.status === 200) {
-        ctx.reply("Order successfully registered!")
+        ctx.reply("Заказ успешно зарегистрирован!")
     } else
-        ctx.reply(`Error registering payment, contact support!\n
+        ctx.reply(`Ошибка регистрации платежа, свяжитесь с поддержкой!\n
         orderId:${payload.orderId}\n
         ${ctx.update.message.successful_payment.telegram_payment_charge_id}\n
         ${ctx.update.message.successful_payment.provider_payment_charge_id}
